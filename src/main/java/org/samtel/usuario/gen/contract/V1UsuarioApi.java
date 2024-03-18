@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 
 
 @Path("/v1/es/crearUsuario")
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2024-03-18T08:17:25.618224300-05:00[America/Bogota]", comments = "Generator version: 7.4.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaJAXRSSpecServerCodegen", date = "2024-03-18T10:39:47.534705600-05:00[America/Bogota]", comments = "Generator version: 7.4.0")
 public interface V1UsuarioApi {
 
     @POST
