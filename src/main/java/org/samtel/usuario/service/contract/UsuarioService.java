@@ -5,5 +5,5 @@ import org.samtel.usuario.gen.type.UsuarioTypeInput;
 
 @ApplicationScoped
 public interface UsuarioService {
-    Object crearUsuario(UsuarioTypeInput usuarioTypeInput);
+    UsuarioTypeInput crearUsuario(UsuarioTypeInput usuarioTypeInput);
 }

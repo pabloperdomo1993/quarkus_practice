@@ -7,20 +7,20 @@ import org.samtel.usuario.dao.UsuarioDao;
 import org.samtel.usuario.entity.UsuarioEntity;
 import org.samtel.usuario.gen.type.UsuarioTypeInput;
 import org.samtel.usuario.service.contract.UsuarioService;
+import org.samtel.usuario.utils.mapper.UsuarioMapper;
 
 @ApplicationScoped
 public class UsuarioServiceImpl implements UsuarioService {
     @Inject
     UsuarioDao usuarioDao;
 
+    @Inject
+    UsuarioMapper usuarioMapper;
     @Transactional
-    public UsuarioEntity crearUsuario(UsuarioTypeInput usuarioTypeInput) {
-        UsuarioEntity usuarioEntity = new UsuarioEntity();
-        usuarioEntity.setName(usuarioTypeInput.getName());
-        usuarioEntity.setLastname(usuarioTypeInput.getLastname());
-
+    public UsuarioTypeInput crearUsuario(UsuarioTypeInput usuarioTypeInput) {
+        UsuarioEntity usuarioEntity = usuarioMapper.usuarioTypeToEntity(usuarioTypeInput);
         usuarioDao.persist(usuarioEntity);
-
-        return usuarioEntity;
+        UsuarioTypeInput usuarioType = usuarioMapper.usuarioEntityToType(usuarioEntity);
+        return usuarioType;
     }
 }
