@@ -8,14 +8,14 @@ servers:
 info:
   description: Servicio de entidad Usuario.
   version: 0.0.1
-title: Usuarios
-contact:
-  name: Samtel
-  url: https://www.samtel.co/
-  email: api@samtel.co
-license:
-  name: GNU GPLv3
-  url: ‘https://www.gnu.org/licenses/gpl-3.0.html’
+  title: Usuarios
+  contact:
+    name: Samtel
+    url: https://www.samtel.co/
+    email: api@samtel.co
+  license:
+    name: GNU GPLv3
+    url: ‘https://www.gnu.org/licenses/gpl-3.0.html’
 tags:
   - name: Usuarios
     description: Gestion de usuarios
@@ -45,7 +45,58 @@ paths:
           description: "Parámetros de entrada no validos."
         "404":
           description: "No se encuentra la novedad."
-
+  /v1/es/buscarUsuarioPorId/{idtbl_user}:
+    get:
+      tags:
+        - Listar usuario por id
+      parameters:
+        - in: path
+          name: idtbl_user   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID
+      operationId: buscarUsuarioPorId
+      responses:
+        "200":
+          description: Usuario creado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
+  /v1/es/borrarUsuarioPorId/{idtbl_user}:
+    get:
+      tags:
+        - Listar usuario por id
+      parameters:
+        - in: path
+          name: idtbl_user   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID
+      operationId: borrarUsuarioPorId
+      responses:
+        "200":
+          description: Usuario eliminado.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
 #---------------------------------------------
 #Se declaran los Modelos/Schemas del servicio
 #---------------------------------------------

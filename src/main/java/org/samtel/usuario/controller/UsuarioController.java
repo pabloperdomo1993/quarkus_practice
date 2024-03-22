@@ -19,17 +19,34 @@ public class UsuarioController implements V1UsuarioApi {
     UsuarioService usuarioService;
 
     @Override
+    public Response borrarUsuarioPorId(Integer idtblUser) {
+        return null;
+    }
+
+    @Override
+    public Response buscarUsuarioPorId(Integer idtblUser) {
+        LOG.info("Inicio verUsuario");
+        UsuarioTypeResponse usuarioResponse = null;
+        try {
+            usuarioResponse = usuarioService.verUsuario(idtblUser);
+        } catch (ApplicationException e) {
+            LOG.error(Constants.ERROR_SERVICIO + e.getMessage()+ " verUsuarioController");
+            return Response.status(Response.Status.BAD_REQUEST).entity(usuarioResponse).build();
+        }
+        LOG.info("Finaliza ver usuario Controller");
+        return Response.status(Response.Status.CREATED).entity(usuarioResponse).build();
+    }
+
+    @Override
     public Response crearUsuario(UsuarioTypeInput usuarioTypeInput) {
         LOG.info("Inicio crearUsuario");
-
         UsuarioTypeInput usuarioType = null;
         try {
             usuarioType = usuarioService.crearUsuario(usuarioTypeInput);
         } catch (ApplicationException e) {
-            LOG.error(Constants.ERROR_SERVICIO + e.getMessage()+ "crearUsuarioController");
+            LOG.error(Constants.ERROR_SERVICIO + e.getMessage()+ " crearUsuarioController");
             return Response.status(Response.Status.BAD_REQUEST).entity(usuarioType).build();
         }
-
         LOG.info("Finaliza crear usuario Controller");
         return Response.status(Response.Status.CREATED).entity(usuarioType).build();
     }
