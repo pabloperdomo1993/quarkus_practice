@@ -20,7 +20,16 @@ public class UsuarioController implements V1UsuarioApi {
 
     @Override
     public Response borrarUsuarioPorId(Integer idtblUser) {
-        return null;
+        LOG.info("Inicio eliminarUsuario");
+        UsuarioTypeResponse usuarioResponse = null;
+        try {
+            usuarioResponse = usuarioService.eliminarUsuario(idtblUser);
+        } catch (ApplicationException e) {
+            LOG.error(Constants.ERROR_SERVICIO + e.getMessage()+ " eliminarUsuarioController");
+            return Response.status(Response.Status.BAD_REQUEST).entity(usuarioResponse).build();
+        }
+        LOG.info("Finaliza eliminar usuario Controller");
+        return Response.status(Response.Status.CREATED).entity(usuarioResponse).build();
     }
 
     @Override

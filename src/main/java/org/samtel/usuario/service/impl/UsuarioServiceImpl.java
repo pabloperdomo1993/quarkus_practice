@@ -25,6 +25,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     UsuarioMapper usuarioMapper;
     @Transactional
     public UsuarioTypeInput crearUsuario(UsuarioTypeInput usuarioTypeInput) {
+        LOG.info("Inicio crearUsuario");
         UsuarioTypeInput usuarioType = null;
         try {
             UsuarioEntity usuarioEntity = usuarioMapper.usuarioTypeToEntity(usuarioTypeInput);
@@ -33,14 +34,28 @@ public class UsuarioServiceImpl implements UsuarioService {
         } catch (ApplicationException e){
             LOG.error(Constants.ERROR_SERVICIO + e.getMessage()+ " crearUsuarioServiceImpl");
         }
+        LOG.info("Finaliza crear usuario ServiceImpl");
         return usuarioType;
     }
 
     @Transactional
     public UsuarioTypeResponse verUsuario(Integer idtblUser){
+        LOG.info("Inicio verUsuario");
         long longIdtblUser = idtblUser.longValue();
         UsuarioEntity usuarioEntity = usuarioDao.findById(longIdtblUser);
         UsuarioTypeResponse usuarioTypeResponse = usuarioMapper.usuarioEntityToTypeResponse(usuarioEntity);
+        LOG.info("Finaliza ver usuario ServiceImpl");
+        return usuarioTypeResponse;
+    }
+
+    @Transactional
+    public UsuarioTypeResponse eliminarUsuario(Integer idtblUser){
+        LOG.info("Inicio eliminarUsuario");
+        long longIdtblUser = idtblUser.longValue();
+        UsuarioEntity usuarioEntity = usuarioDao.findById(longIdtblUser);
+        UsuarioTypeResponse usuarioTypeResponse = usuarioMapper.usuarioEntityToTypeResponse(usuarioEntity);
+        usuarioDao.delete(usuarioEntity);
+        LOG.info("Finaliza eliminar usuario ServiceImpl");
         return usuarioTypeResponse;
     }
 }

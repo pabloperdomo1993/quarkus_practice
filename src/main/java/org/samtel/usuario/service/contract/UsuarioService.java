@@ -8,4 +8,5 @@ import org.samtel.usuario.gen.type.UsuarioTypeResponse;
 public interface UsuarioService {
     UsuarioTypeInput crearUsuario(UsuarioTypeInput usuarioTypeInput);
     UsuarioTypeResponse verUsuario(Integer idtblUser);
+    UsuarioTypeResponse eliminarUsuario(Integer idtblUser);
 }
