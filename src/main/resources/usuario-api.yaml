@@ -97,6 +97,36 @@ paths:
           description: "Parámetros de entrada no validos."
         "404":
           description: "No se encuentra la novedad."
+  /v1/es/actualizarUsuario/{idtbl_user}:
+    post:
+      tags:
+        - Actualizar usuario
+      parameters:
+        - in: path
+          name: idtbl_user   # Note the name is the same as in the path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: The user ID
+      operationId: actualizarUsuario
+      requestBody:
+        description: Actualizar usuario
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsuarioTypeInput"
+      responses:
+        "200":
+          description: Usuario actualizado.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UsuarioTypeResponse"
+        "400":
+          description: "Parámetros de entrada no validos."
+        "404":
+          description: "No se encuentra la novedad."
 #---------------------------------------------
 #Se declaran los Modelos/Schemas del servicio
 #---------------------------------------------

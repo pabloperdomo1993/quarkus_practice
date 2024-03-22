@@ -9,4 +9,5 @@ public interface UsuarioService {
     UsuarioTypeInput crearUsuario(UsuarioTypeInput usuarioTypeInput);
     UsuarioTypeResponse verUsuario(Integer idtblUser);
     UsuarioTypeResponse eliminarUsuario(Integer idtblUser);
+    UsuarioTypeResponse actualizarUsuario(Integer idtblUser, UsuarioTypeInput usuarioTypeInput);
 }

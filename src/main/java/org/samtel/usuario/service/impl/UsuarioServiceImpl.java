@@ -58,4 +58,17 @@ public class UsuarioServiceImpl implements UsuarioService {
         LOG.info("Finaliza eliminar usuario ServiceImpl");
         return usuarioTypeResponse;
     }
+
+    @Transactional
+    public UsuarioTypeResponse actualizarUsuario(Integer idtblUser, UsuarioTypeInput usuarioTypeInput) {
+        LOG.info("Inicio actualizarUsuario");
+        long longIdtblUser = idtblUser.longValue();
+        UsuarioEntity usuarioEntity = usuarioDao.findById(longIdtblUser);
+        usuarioEntity.setName(usuarioTypeInput.getName());
+        usuarioEntity.setLastname(usuarioTypeInput.getLastname());
+        usuarioDao.persist(usuarioEntity);
+        UsuarioTypeResponse usuarioTypeResponse = usuarioMapper.usuarioEntityToTypeResponse(usuarioEntity);
+        LOG.info("Finaliza actulizar usuario ServiceImpl");
+        return usuarioTypeResponse;
+    }
 }

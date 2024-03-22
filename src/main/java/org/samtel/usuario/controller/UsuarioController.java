@@ -19,6 +19,20 @@ public class UsuarioController implements V1UsuarioApi {
     UsuarioService usuarioService;
 
     @Override
+    public Response actualizarUsuario(Integer idtblUser, UsuarioTypeInput usuarioTypeInput) {
+        LOG.info("Inicio actualizarUsuario");
+        UsuarioTypeResponse usuarioResponse = null;
+        try {
+            usuarioResponse = usuarioService.actualizarUsuario(idtblUser, usuarioTypeInput);
+        } catch (ApplicationException e) {
+            LOG.error(Constants.ERROR_SERVICIO + e.getMessage()+ " actualizarUsuarioController");
+            return Response.status(Response.Status.BAD_REQUEST).entity(usuarioResponse).build();
+        }
+        LOG.info("Finaliza actualizar usuario Controller");
+        return Response.status(Response.Status.CREATED).entity(usuarioResponse).build();
+    }
+
+    @Override
     public Response borrarUsuarioPorId(Integer idtblUser) {
         LOG.info("Inicio eliminarUsuario");
         UsuarioTypeResponse usuarioResponse = null;
